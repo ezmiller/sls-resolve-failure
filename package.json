@@ -1,0 +1,12 @@
+{
+  "name": "sls-resolve-failure",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@serverless/typescript": "^3.29.0",
+    "esbuild": "^0.17.17",
+    "serverless": "3.19.0",
+    "serverless-esbuild": "1.26.2"
+  }
+}

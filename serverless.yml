@@ -1,0 +1,44 @@
+service: shopify-functions
+frameworkVersion: '3'
+useDotenv: true
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  
+functions:
+  app:
+    handler: src/handler.main
+    events:
+    - httpApi:
+        path: "/{proxy+}"
+        method: "*"
+    environment:
+      SHOP: ${self:custom.environment.${sls:stage}.SHOP}
+
+custom:
+  stage: ${opt:stage, 'dev'}
+  environment:
+    SESSIONS_TABLE: "${self:service}-sessions-table-${sls:stage}"
+    SHOPS_TABLE: "${self:service}-shops-table-${sls:stage}"
+    dev:
+      SHOP: shop-dev.myshopify.com
+    qa:
+      SHOP: shop-qa.myshopify.com
+    prod:
+      SHOP: shop-prod.myshopify.com
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    exclude:
+    - aws-sdk
+    target: node16
+    define: {}
+    platform: node
+    concurrency: 10
+
+plugins:
+- serverless-esbuild
