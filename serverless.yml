@@ -1,4 +1,4 @@
-service: shopify-functions
+service: sls-resolve-failure
 frameworkVersion: '3'
 useDotenv: true
 package:
@@ -21,8 +21,6 @@ functions:
 custom:
   stage: ${opt:stage, 'dev'}
   environment:
-    SESSIONS_TABLE: "${self:service}-sessions-table-${sls:stage}"
-    SHOPS_TABLE: "${self:service}-shops-table-${sls:stage}"
     dev:
       SHOP: shop-dev.myshopify.com
     qa:
