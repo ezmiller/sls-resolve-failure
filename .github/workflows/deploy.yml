@@ -1,0 +1,20 @@
+name: Deploy/Shopify Functions App
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        stage: ['dev']
+    permissions:
+      id-token: write
+      contents: read
+    uses: ./.github/workflows/reusable-deploy.yml
+    with:
+      serverless-path: './packages/shopify-functions'
+      stage: ${{ matrix.stage }}​

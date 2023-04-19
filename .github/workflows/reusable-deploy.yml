@@ -1,0 +1,41 @@
+name: 'Deploy Serverless'
+
+on:
+  workflow_call:
+    inputs:
+      stage:
+        description: 'The serverless deployment stage to use.'
+        type: string
+        required: true
+        default: 'dev'
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.13.0'
+          cache: yarn
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: us-east-1
+          role-to-assume: <add-aws-role-with-required permissions> 
+
+      - name: Install project dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: inspect inputs.stage
+        run: echo '${{ inputs.stage }}'
+
+      - name: debug step
+        run: yarn serverless print --stage `${STAGE}`
+        env:
+          STAGE: ${{ inputs.stage }}
