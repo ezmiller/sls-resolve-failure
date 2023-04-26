@@ -23,12 +23,6 @@ jobs:
           node-version: '16.13.0'
           cache: yarn
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: us-east-1
-          role-to-assume: <add-aws-role-with-required permissions> 
-
       - name: Install project dependencies
         run: yarn install --frozen-lockfile
 
