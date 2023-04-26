@@ -30,6 +30,6 @@ jobs:
         run: echo '${{ inputs.stage }}'
 
       - name: debug step
-        run: yarn serverless print --stage '${STAGE}'
+        run: yarn serverless print --stage "${STAGE}"
         env:
           STAGE: ${{ inputs.stage }}
