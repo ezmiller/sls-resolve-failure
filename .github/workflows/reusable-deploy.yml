@@ -1,4 +1,4 @@
-name: 'Deploy Serverless'
+name: 'Resuable Deploy Serverless'
 
 on:
   workflow_call:

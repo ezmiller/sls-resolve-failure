@@ -1,4 +1,4 @@
-name: Deploy/Shopify Functions App
+name: Deploy Something
 
 on:
   pull_request:
