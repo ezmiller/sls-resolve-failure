@@ -16,5 +16,4 @@ jobs:
       contents: read
     uses: ./.github/workflows/reusable-deploy.yml
     with:
-      serverless-path: './packages/shopify-functions'
       stage: ${{ matrix.stage }}​
