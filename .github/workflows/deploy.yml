@@ -16,4 +16,4 @@ jobs:
       contents: read
     uses: ./.github/workflows/reusable-deploy.yml
     with:
-      stage: ${{ matrix.stage }}​
+      stage: ${{ matrix.stage }}
